@@ -1,0 +1,37 @@
+name: Publish
+permissions: write-all
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: opensuse/tumbleweed:latest
+    env:
+      TOKEN: ${{ secrets.TOKEN }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install dependencies
+      run: |
+        zypper --non-interactive in zola git
+    - name: Generate static site
+      run: |
+        rm -rf themes/
+        mkdir -p themes/
+        pushd themes/
+        git clone --depth 1 https://github.com/Speyll/anemone
+        popd
+        zola build
+    - name: Publish static site
+      run: |
+        pushd public
+        touch .nojekyll
+        echo "augusthottie.pl" >> CNAME
+        git init
+        git branch -m gh-pages
+        git config --global user.email "chimexjessica@outlook.com"
+        git config --global user.name "augusthottie"
+        git remote add origin "https://augusthottie:$TOKEN@github.com/augusthottie/ssg-site.git"
+        git add -A
+        git commit -m "update site page"
+        git push --force -u origin gh-pages
