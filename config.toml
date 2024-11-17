@@ -19,10 +19,10 @@ highlight_code = true
 toc = true
 display_author = true
 list_pages = true
-header_nav = [
-  { url = "/", name_en = "/Introduction"},
-  { url = "/Experience", name_en = "/Experience"},
-  { url = "/Goals & Tips", name_en = "/Goals & Tips"},
-  { url = "/Conclusion", name_en = "/Conclusion"}
+# header_nav = [
+#   { url = "/", name_en = "/Introduction"},
+#   { url = "/Experience", name_en = "/Experience"},
+#   { url = "/Goals & Tips", name_en = "/Goals & Tips"},
+#   { url = "/Conclusion", name_en = "/Conclusion"}
 
-]
+# ]
